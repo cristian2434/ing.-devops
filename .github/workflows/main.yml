@@ -45,7 +45,7 @@ jobs:
 
       # Subir el artefacto generado
       - name: Upload JAR artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: project-jar
           path: target/*.jar
