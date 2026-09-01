@@ -1,6 +1,7 @@
 package com.example.bdget.service;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
@@ -46,6 +47,13 @@ class StudentServiceImplTest {
     void testGetStudentById() {
         when(repository.findById(1L)).thenReturn(Optional.of(student));
         assertEquals(Optional.of(student), service.getStudentById(1L));
+    }
+
+    @Test
+    void testSearchStudentsByName() {
+        List<Student> expected = Arrays.asList(student);
+        when(repository.findByNameContainingIgnoreCase("john")).thenReturn(expected);
+        assertEquals(expected, service.searchStudentsByName("john"));
     }
 
     @Test
