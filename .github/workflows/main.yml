@@ -40,3 +40,14 @@ jobs:
         with:
           name: project-jar
           path: target/*.jar
+
+  docker-cloud-sim:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Build Docker image (simulación de empaquetado cloud)
+        run: docker build -t bdget:ci .
+      - name: Verificar que la imagen se creó correctamente
+        run: docker images bdget:ci
