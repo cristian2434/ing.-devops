@@ -31,5 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Credenciales y secretos ###
 Wallet_N72BZHZWYZGTE7OH/
-Wallet_N72BZHZWYZGTE7OH/
+wallet/
+.env
