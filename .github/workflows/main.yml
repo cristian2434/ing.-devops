@@ -1,6 +1,9 @@
 name: test-and-build-java
 
 on:
+  push:
+    branches:
+      - develop
   pull_request:
     branches:
       - main
@@ -9,41 +12,29 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      # Clonar el código
       - name: Checkout code
         uses: actions/checkout@v4
-
-      # Configurar JDK Temurin
       - name: Setup JDK Temurin
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-
-      # Ejecutar los tests
       - name: Test Java code
         run: mvn test
 
   build:
-    needs: test # Define la dependencia del job test
+    needs: test
     runs-on: ubuntu-latest
     steps:
-      # Clonar el código
       - name: Checkout code
         uses: actions/checkout@v4
-
-      # Configurar JDK Temurin
       - name: Setup JDK Temurin
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-
-      # Compilar el proyecto y empaquetar en un JAR (saltando los tests)
       - name: Build JAR without tests
         run: mvn package -DskipTests
-
-      # Subir el artefacto generado
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
